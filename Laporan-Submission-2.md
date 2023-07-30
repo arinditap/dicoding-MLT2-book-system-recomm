@@ -132,6 +132,8 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 
 2. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini[2].
 
+    Pada tahap ini, model akan menghitung skor kecocokan antara pembaca(user) dan buku menggunakan tekenik embedding. Langkah yang pertama adalah melakukan proses embedding terhadap data pembaca(user) dan buku. Kemudian lakukan perkalian dot antara embedding pembaca dan buku. Tambahkan bias untuk setiap pembaca dan buku. Fungsi sigmoid digunakan untuk menetapkan skor kecocokan dalam skala [0,1]. Langkah-langkah yang disebutkan diatas akan dimasukkan ke dalam sebuah class dari Keras bernama 'RecommenderNet()'.
+
    Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)[4]
 
    Kekurangan:
