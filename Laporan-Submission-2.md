@@ -38,11 +38,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
    - tag_id : ID tag (genre)
    - count : Jumlah goodreads
 
-  Untuk mengetahui jumlah genre:  
-  ```sh
-    print('Jumlah genre buku: ', len(genre.tag_id.unique()))
-  ```
-  Output: 
+  Untuk mengetahui jumlah genre digunakan fungsi `len()` dengan menambah fungsi `unique`. Sehingga outputnya: 
   ```sh
     Jumlah genre buku:  34252
   ```
@@ -57,12 +53,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
    - original_publication_year : tahun terbit buku
    - original_title : judul asli buku
    
-   Untuk melihat jumlah buku dan jumlah nama penulis menggunakan:
-    ``` sh
-        print('Jumlah buku: ', len(buku.book_id.unique()))
-        print('Jumlah author: ', len(buku.authors.unique()))
-    ```
-    Output:
+   Untuk melihat jumlah buku dan jumlah nama penulis menggunakan fungsi `len()` dan`unique()`. Sehingga outputnya:
    ```sh
      Jumlah buku:  10000
      Jumlah author:  4664
@@ -79,11 +70,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
    - tag_id : ID tag (genre)
    - tag_name : Nama tag (genre)
 
-   Untuk mengetahui jumlah genre:  
-    ```sh
-      print('Jumlah jenis genre buku: ', len(jenis_genre.tag_id.unique()))
-    ```
-   Output: 
+   Untuk mengetahui jumlah genre menggunakan fungsi `len()` dan `unique()`. Outputnya:
     ```sh
       Jumlah jenis genre buku:  34252
     ```
@@ -91,15 +78,8 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
    - user_id : ID pengguna/pembaca
    - book_id : ID buku
    
-    Untuk mengetahui jumlah genre:  
-    ```sh
-      print('Jumlah user: ', len(user.user_id.unique()))
-    ```
-    Output: 
-    ```sh
-      Jumlah user:  48871
-    ``` 
-  
+    Dari data didapatkan Jumlah User = 48871.
+      
 File yang digunakan untuk pemodelan adalah file `books.csv` dan `ratings.csv` dengan menggunakan variabel **'book_id', 'original_title', 'authors', 'original_publication_year'** untuk model _content-based filtering_, dan variabel **'user_id', 'book_id', 'authors', 'original_title'** untuk model _collaborative filtering_.
 
 
@@ -134,12 +114,26 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
    Kekurangan: karena meta feature yang digunakan kita yang menentukan sendiri, kualitas dari rekomendasi tergantung kualitas dari meta feature itu sendiri.
 
    Modelling menggunakan content based filtering menghasilkan rekomendasi top 5 buku dari judul buku yang dimasukkan pada sistem.
-   ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/95aded26-02ed-45e2-a205-990b3a2a7f37)
-   > Gambar 2. Hasil Rekomendasi Top 5 Buku dari Judul Buku yang dimasukkan.
 
-   Dari Gambar 2 dapat dilihat saat kita memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis.
+   > Tabel 1. Hasil Pencarian Informasi Berdasarkan Judul Buku
 
-2. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini.
+   |    | IDBuku |           judul_buku |            penulis | thn_terbit |
+   |----|--------|----------------------|--------------------|------------|
+   | 39 |   348  | The Door Into Summer | Robert A. Heinlein |     1957.0 |
+
+   > Tabel 2. Hasil Rekomendasi Top 5 Buku dari Judul Buku yang Dimasukkan
+   
+   |   |                                        judul_buku |            penulis |
+   |---|---------------------------------------------------|--------------------|
+   | 0 |                              Time Enough for Love | Robert A. Heinlein |
+   | 1 |                        Stranger in a Strange Land | Robert A. Heinlein |
+   | 2 |                          Job: A Comedy of Justice | Robert A. Heinlein |
+   | 3 | Mrs. Frisby and the Rats of NIMH (Rats of NMH ... |  Robert C. O'Brien |
+   | 4 |                                    Shadow Drivers |      Robert Kurson |
+
+   Dari Tabel 1 dapat dilihat saat kita memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
+
+3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini.
 
    Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)
 
@@ -147,17 +141,27 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
    - Cold-start problem (tidak dapat menghasilkan rekomendasi dikarenakan tidak adanya informasi preferensi) untuk pengguna baru dan item baru
    - Sparse problem (matriks rating pengguna-item yang jarang/banyak yang kosong dapat mempengaruhi keakuratan algoritma)
 
-   Modelling menggunakan collaborative filtering menghasilkan rekomendasi top 10 buku dengan rating tinggi, dapat dilihat pada Gambar 3.
+   Modelling menggunakan collaborative filtering menghasilkan rekomendasi top 10 buku dengan rating tinggi, dapat dilihat pada Gambar 2.
    ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/0d96ff8a-dba7-42d5-ab15-2c8e2e7cabe3)
-   > Gambar 3. Hasil Rekomendasi Top 10 Buku dengan Rating Tinggi.
+   > Gambar 2. Hasil Rekomendasi Top 10 Buku dengan Rating Tinggi.
 
 ## Evaluation
+
+Metrik evaluasi yang digunakan pada proyek ini adalah _Precision_ dan _Root Mean Square Error_. Untuk model content based filtering akan dievaluasi menggunakan _Precision_, sedangkan collaborative filtering dievaluasi dengan _RMSE_.
+
+_**Precision**_
+
+Precision merupakan metrik untuk evaluasi model machine learning dimana metrik ini yang mengkuantifikasi jumlah prediksi positif yang benar yang dibuat. Berikut merupakan rumus dari metrik precision:
+
+Precision = # of recommendation that are relevant / # of item we recommended
+
+Diketahui pada output rekomendasi content based filtering didapat rekomendasi buku berdasarkan penulisnya. Penulis yang dicari adalah "Robert A. Heinlein". Sistem memberikan 5 rekomendasi buku, dimana 3 dari 5 buku adalah buku dengan penulis yang sama atau data relevan. Maka precision dicari dengan membagikan hasil rekomendasi yang relevan dibagi jumlah yang direkomendasikan. Jadi precision = 3/5 = 0.6, sehingga persentase presisinya adalah 60%.
+
 _**Root Mean Squared Error**_
 
 Metrik RMSE _(Root Mean Square Error)_ digunakan pada penelitian ini untuk mengevaluasi kinerja model yang dihasilkan. RMSE merupakan cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif. _Root Mean Squared Error_ (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus dalam Gambar 4.
 
-![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/b7271fa3-2ceb-4935-873d-d77516843d44)
-> Gambar 4. Rumus Root Mean Square Error
+$$RMSE = \sqrt{\Sigma_{i=1}^{n}{\frac{(ŷ_i - y_i)^{2}}{n}}}$$
 
 Keterangan: 
 
