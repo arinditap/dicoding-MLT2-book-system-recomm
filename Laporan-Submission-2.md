@@ -104,7 +104,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 3. **Membagi Dataset**, dataset akan dibagi menjadi data train dan data test dengan rasio 80:20. Namun sebelum itu dilakukan pengacakan dataset agar distribusinya random/acak. Teknik Encoding Data dan Membagi Dataset dilakukan untuk nantinya dipakai pada model _collaborative filtering_.
 
 ## Modeling
-1. _**Content Based Filtering**_. Content-based filtering mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi. Pada model ini diterapkan teknik _TF-IDF_ untuk mengubah fitur text menjadi fitur numerik dengan menggunakan fungsi `TfidfVectorizer()` dari library sklearn.
+1. _**Content Based Filtering**_. Content-based filtering mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi. Pada model ini diterapkan teknik _TF-IDF_ untuk mengubah fitur text menjadi fitur numerik dengan menggunakan fungsi `TfidfVectorizer()` dari library sklearn[1].
 
    Kelebihan: baik dipakai ketika skala user besar, dapat menemukan ketertarikan spesifik dari seorang user dan dapat merekomendasikan item yang jarang disukai orang lain.
 
@@ -130,7 +130,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 
    Dari Tabel 1 dapat dilihat saat memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
 
-3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini.
+3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini[2].
 
    Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)
 
@@ -183,18 +183,7 @@ Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu mod
       metrics=[tf.keras.metrics.RootMeanSquaredError()]
   )
 ```
-Kemudian proses training dilakukan sebagai berikut: 
-```sh
-  history = model.fit(
-    x = x_train,
-    y = y_train,
-    batch_size = 8,
-    steps_per_epoch = 10000,
-    epochs = 15,
-    validation_data = (x_val, y_val)
-  )
-```
-Output dari proses training dapat dilihat pada Gambar 3.
+Setelah dilakukan proses training, output dari proses training dapat dilihat pada Gambar 3.
 
 ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/abee4f8f-9764-4525-904c-9075f2f3c732)
 > Gambar 3. Output Proses Training
@@ -204,7 +193,11 @@ Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Colla
 ![rmse](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/dd8c29bd-b18f-4066-84a5-b7ce256cae4b)
 > Gambar 4. Visualisasi Hasil RMSE
 
-
+## Kesimpulan
+- Sistem rekomendasi buku dapat dibuat menggunakan content based filtering dimana rekomendasi berdasarkan penulis, hasil akhir model ini merekomendasikan 5 buku dengan penulis yang sama.
+- Sistem rekomendasi buku menggunakan collaborative filtering menghasilkan 10 rekomendasi buku berdasarkan rating tertinggi yang diberikan oleh user.
+- Setelah dilakukan evaluasi, model content based filtering dievaluasi menggunakan precision didapatkan precision sistem sebesar 60%.
+- Model collaborative filtering dievaluasi menggunakan RMSE didapatkan nilai RMSE sebesar 0.2162.
 
 Referensi:
 1. Alkaff, M., Khatimi, H., & Eriadi, A. (2020). Sistem Rekomendasi Buku pada Perpustakaan Daerah Provinsi Kalimantan Selatan Menggunakan Metode Content-Based Filtering. MATRIK: Jurnal Manajemen, Teknik Informatika Dan Rekayasa Komputer, 20(1), 193-202.
