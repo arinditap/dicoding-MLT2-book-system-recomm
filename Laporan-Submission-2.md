@@ -30,7 +30,7 @@ Penelitian ini dilakukan dengan tujuan memberikan rekomendasi buku sesuai dengan
 
 ## Data Understanding
 Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-10k"_](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k?select=books.csv). Dataset ini berisi 5 file dengan ekstensi csv, yaitu:
-1. `book_tags.csv`, file ini berisi data tag buku (label), diurutkan berdasarkan ascending goodreadsbookid dan count descending.
+1. **'book_tags.csv'**, file ini berisi data tag buku (label), diurutkan berdasarkan ascending goodreadsbookid dan count descending.
    - goodreads_id : ID dari goodreads
    - tag_id : ID tag (genre)
    - count : Jumlah goodreads
@@ -39,7 +39,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
   ```sh
     Jumlah genre buku:  34252
   ```
-2. `books.csv`, berisi informasi mengenai buku.
+2. **'books.csv'**, berisi informasi mengenai buku.
    - id : ID dari file books
    - book_id : ID buku
    - best_book_id : ID dari buku populer
@@ -55,7 +55,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
      Jumlah buku:  10000
      Jumlah author:  4664
    ```
-4. `ratings.csv`, berisi rating buku sesuai id pengguna.
+4. **'ratings.csv'**, berisi rating buku sesuai id pengguna.
    - book_id : ID buku
    - user_id : ID Pengguna
    - rating : rating buku
@@ -63,7 +63,7 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
    Jumlah tiap rating dapat dilihat pada Gambar 1
    ![download](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/1605dd73-96c3-43e3-b268-71557daa7d91)
    > Gambar 1. Visualisasi Jumlah Rating Buku dari Pengguna
-5. `tag.csv`, berisi tentang pemetaan id-nama tag.
+5. **'tag.csv'**, berisi tentang pemetaan id-nama tag.
    - tag_id : ID tag (genre)
    - tag_name : Nama tag (genre)
 
@@ -71,13 +71,13 @@ Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-
     ```sh
       Jumlah jenis genre buku:  34252
     ```
-6. `to_read.csv`, daftar buku yang ditandai oleh pengguna "untuk dibaca". Diurutkan berdasarkan user_id dan book_id.
+6. **'to_read.csv'**, daftar buku yang ditandai oleh pengguna "untuk dibaca". Diurutkan berdasarkan user_id dan book_id.
    - user_id : ID pengguna/pembaca
    - book_id : ID buku
    
     Dari data didapatkan Jumlah User = 48871.
       
-File yang digunakan untuk pemodelan adalah file `books.csv` dan `ratings.csv` dengan menggunakan variabel **'book_id', 'original_title', 'authors', 'original_publication_year'** untuk model _content-based filtering_, dan variabel **'user_id', 'book_id', 'authors', 'original_title'** untuk model _collaborative filtering_.
+File yang digunakan untuk pemodelan adalah file 'books.csv' dan 'ratings.csv' dengan menggunakan variabel **'book_id', 'original_title', 'authors', 'original_publication_year'** untuk model _content-based filtering_, dan variabel **'user_id', 'book_id', 'authors', 'original_title'** untuk model _collaborative filtering_.
 
 
 ## Data Preparation
@@ -128,11 +128,11 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
    | 3 | Mrs. Frisby and the Rats of NIMH (Rats of NMH ... |  Robert C. O'Brien |
    | 4 |                                    Shadow Drivers |      Robert Kurson |
 
-   Dari Tabel 1 dapat dilihat saat memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
+   Dari Tabel 1 dapat dilihat saat memasukkan judul buku **'The Door Into Summer'** muncul informasi buku tersebut dengan nama penulis **'Robert A. Heinlein'**. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
 
 3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini[2].
 
-   Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)
+   Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)[4]
 
    Kekurangan:
    - Cold-start problem (tidak dapat menghasilkan rekomendasi dikarenakan tidak adanya informasi preferensi) untuk pengguna baru dan item baru
