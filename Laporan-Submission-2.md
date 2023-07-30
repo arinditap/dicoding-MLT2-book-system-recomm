@@ -159,7 +159,7 @@ Diketahui pada output rekomendasi content based filtering didapat rekomendasi bu
 
 _**Root Mean Squared Error**_
 
-Metrik RMSE _(Root Mean Square Error)_ digunakan pada penelitian ini untuk mengevaluasi kinerja model yang dihasilkan. RMSE merupakan cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif. _Root Mean Squared Error_ (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus dalam Gambar 4.
+Metrik RMSE _(Root Mean Square Error)_ digunakan pada penelitian ini untuk mengevaluasi kinerja model yang dihasilkan. RMSE merupakan cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif. _Root Mean Squared Error_ (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus berikut.
 
 $$RMSE = \sqrt{\Sigma_{i=1}^{n}{\frac{(ŷ_i - y_i)^{2}}{n}}}$$
 
@@ -197,12 +197,12 @@ Kemudian proses training dilakukan sebagai berikut:
     validation_data = (x_val, y_val)
   )
 ```
-Output dari proses training dapat dilihat pada Gambar 5.
+Output dari proses training dapat dilihat pada Gambar 3.
 
 ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/abee4f8f-9764-4525-904c-9075f2f3c732)
-> Gambar 5. Output Proses Training
+> Gambar 3. Output Proses Training
 
-Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Collaborative filtering dapat dilihat pada Gambar 6.
+Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Collaborative filtering dapat dilihat pada Gambar 4.
 
 ![rmse](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/dd8c29bd-b18f-4066-84a5-b7ce256cae4b)
-> Gambar 6. Visualisasi Hasil RMSE
+> Gambar 4. Visualisasi Hasil RMSE
