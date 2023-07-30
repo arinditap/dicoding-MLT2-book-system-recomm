@@ -130,7 +130,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 
    Dari Tabel 1 dapat dilihat saat memasukkan judul buku **'The Door Into Summer'** muncul informasi buku tersebut dengan nama penulis **'Robert A. Heinlein'**. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
 
-3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini[2].
+2. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini[2].
 
    Kelebihan: Hasil rekomendasi yang beragam dan bersifat _serendipitous_ (relevan dan baru)[4]
 
@@ -138,10 +138,24 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
    - Cold-start problem (tidak dapat menghasilkan rekomendasi dikarenakan tidak adanya informasi preferensi) untuk pengguna baru dan item baru
    - Sparse problem (matriks rating pengguna-item yang jarang/banyak yang kosong dapat mempengaruhi keakuratan algoritma)[4].
 
-   Modelling menggunakan collaborative filtering menghasilkan rekomendasi top 10 buku dengan rating tinggi, dapat dilihat pada Gambar 2.
-   ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/0d96ff8a-dba7-42d5-ab15-2c8e2e7cabe3)
-   > Gambar 2. Hasil Rekomendasi Top 10 Buku dengan Rating Tinggi.
+   Modelling menggunakan collaborative filtering menghasilkan rekomendasi top 10 buku dengan rating tinggi, dapat dilihat pada Tabel 3.
 
+   > Tabel 3. Hasil Rekomendasi Top 10 Buku dengan Rating Tinggi
+
+   
+   | penulis                              | judul_buku                                                        |
+   |--------------------------------------|-------------------------------------------------------------------|
+   | Don DeLillo                          | Libra                                                             |
+   | Paul Auster                          | The Brooklyn Follies                                              |
+   | Robert M. Pirsig                     | Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values |
+   | h.G. Wells, Greg Bear, Carlo Pagetti | The Time Machine                                                  |
+   | Tom Wolfe                            | The Bonfire of the Vanities                                       |
+   | Jacquelyn Mitchard                   | The Deep End of The Oceaan (Cappadora Family, #1)                 |
+   | Toni Morison                         | Paradise                                                          |
+   | V.S. Naipaul                         | A Bend in the River                                               |
+   | Pat Barker                           | Regeneration (Regeneration, #1)                                   |
+   | Fyodor Dostoyevsky, David McDuff     | Crime and Punishment                                              |
+   
 ## Evaluation
 
 Metrik evaluasi yang digunakan pada proyek ini adalah _Precision_ dan _Root Mean Square Error_. Untuk model content based filtering akan dievaluasi menggunakan _Precision_, sedangkan collaborative filtering dievaluasi dengan _RMSE_.
@@ -172,32 +186,20 @@ i = urutan data
 
 n = jumlah data
 
-Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu model prakiraan mendekati variasi nilai obeservasinya. RMSE menghitung seberapa bedanya seperangkat nilai. Semakin kecil nilai RMSE, semakin dekat nilai yang diprediksi dan diamati. Metrik diterapkan dengan kode berikut:
-```sh
-  model = RecommenderNet(num_readers, num_books, 50) # inisialisasi model
+Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu model prakiraan mendekati variasi nilai obeservasinya. RMSE menghitung seberapa bedanya seperangkat nilai. Semakin kecil nilai RMSE, semakin dekat nilai yang diprediksi dan diamati. 
 
-  # model compile
-  model.compile(
-      loss = tf.keras.losses.BinaryCrossentropy(),
-      optimizer = keras.optimizers.Adam(learning_rate=0.001),
-      metrics=[tf.keras.metrics.RootMeanSquaredError()]
-  )
-```
-Setelah dilakukan proses training, output dari proses training dapat dilihat pada Gambar 3.
-
-![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/abee4f8f-9764-4525-904c-9075f2f3c732)
-> Gambar 3. Output Proses Training
-
-Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Collaborative filtering dapat dilihat pada Gambar 4.
+Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Collaborative filtering dapat dilihat pada Gambar 2.
 
 ![rmse](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/dd8c29bd-b18f-4066-84a5-b7ce256cae4b)
-> Gambar 4. Visualisasi Hasil RMSE
+> Gambar 2. Visualisasi Hasil RMSE
+
+Nilai RMSE semakin menurun seiring bertambahnya epoch, hal ini menunjukkan bahwa rekomendasi semakin mendekati nilai prediksi. Dari visualisasi diatas didapatkan nilai error akhir sebesar 0.2138 dan validasi error sebesar 0.2161 yang bisa dikatakan sudah bagus untuk sebuah sistem rekomendasi. 
 
 ## Kesimpulan
 - Sistem rekomendasi buku dapat dibuat menggunakan content based filtering dimana rekomendasi berdasarkan penulis, hasil akhir model ini merekomendasikan 5 buku dengan penulis yang sama.
 - Sistem rekomendasi buku menggunakan collaborative filtering menghasilkan 10 rekomendasi buku berdasarkan rating tertinggi yang diberikan oleh user.
 - Setelah dilakukan evaluasi, model content based filtering dievaluasi menggunakan precision didapatkan precision sistem sebesar 60%.
-- Model collaborative filtering dievaluasi menggunakan RMSE didapatkan nilai RMSE sebesar 0.2162.
+- Model collaborative filtering dievaluasi menggunakan RMSE didapatkan nilai RMSE sebesar 0.2161.
 
 Referensi:
 1. Alkaff, M., Khatimi, H., & Eriadi, A. (2020). Sistem Rekomendasi Buku pada Perpustakaan Daerah Provinsi Kalimantan Selatan Menggunakan Metode Content-Based Filtering. MATRIK: Jurnal Manajemen, Teknik Informatika Dan Rekayasa Komputer, 20(1), 193-202.
