@@ -4,15 +4,10 @@
 
 ## Project Overview
 
-Membaca buku merupakan salah satu cara bagi setiap orang untuk mendapatkan ilmu pengetahuan dan wawasan baru mengenai banyak hal. Buku merupakan sumber informasi dan ilmu pengetahuan yang dapat meningkatkan wawasan tentang berbagai macam hal. "Buku adalah jendela dunia". Pepatah tersebut menunjukkan bahwasannya membaca itu penting. Informasi mengenai beragam jenis buku saat ini telah tersebar luas di internet sehingga dapat diakses oleh banyak orang. Meskipun informasi mengenai beragam jenis buku telah beredar di internet, namun minat baca di Indonesia masih tergolong rendah. Salah satu hal yang menyebabkan hal tersebut adalah banyaknya buku yang ada sehingga pembaca kesulitan untuk menemukan buku yang sesuai dengan kriteria yang diinginkan pembaca. 
+Membaca buku merupakan salah satu cara bagi setiap orang untuk mendapatkan ilmu pengetahuan dan wawasan baru mengenai banyak hal. Buku merupakan sumber informasi dan ilmu pengetahuan yang dapat meningkatkan wawasan tentang berbagai macam hal. "Buku adalah jendela dunia". Pepatah tersebut menunjukkan bahwasannya membaca itu penting. Informasi mengenai beragam jenis buku saat ini telah tersebar luas di internet sehingga dapat diakses oleh banyak orang. Meskipun informasi mengenai beragam jenis buku telah beredar di internet, namun minat baca di Indonesia masih tergolong rendah[3]. Salah satu hal yang menyebabkan hal tersebut adalah banyaknya buku yang ada sehingga pembaca kesulitan untuk menemukan buku yang sesuai dengan kriteria yang diinginkan pembaca. 
 
 Sebagai salah satu upaya untuk meningkatkan minat baca masyarakat adalah dengan membangun sistem rekomendasi buku untuk memudahkan pembaca mencari buku yang sesuai kriteria yang diinginkan dan buku-buku serupa. Untuk itu, dapat diterapkan metode _Content-Based Filtering_ dan _Collaborative Filtering_ ke dalam sistem rekomendasi buku ini. Apabila pembaca mendapatkan rekomendasi buku yang sesuai, diharapkan pembaca dapat mengakses informasi yang sesuai dengan yang diinginkan atau buku-buku dengan kriteria serupa, sehingga minat baca di masyarakat juga mengalami kenaikan.
 
-Referensi:
-  - [Sistem Rekomendasi Buku pada Perpustakaan Daerah Provinsi Kalimantan Selatan Menggunakan Metode Content-Based Filtering](https://journal.universitasbumigora.ac.id/index.php/matrik/article/view/617)
-  - [SISTEM REKOMENDASI: BUKU ONLINE DENGAN METODE COLLABORATIVE FILTERING](https://ejournal.akprind.ac.id/index.php/technoscientia/article/view/612).
-  - [Sistem Rekomendasi Buku Menggunakan Metode Content Based Filtering](https://dspace.uii.ac.id/handle/123456789/35942).
-  - [Sistem Rekomendasi Film Menggunakan Metode Hybrid Collaborative Filtering Dan Content-Based Filtering](https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/18066/17695)
 
 ## Business Understanding
 
@@ -26,10 +21,12 @@ Penelitian ini dilakukan dengan tujuan memberikan rekomendasi buku sesuai dengan
 
 - Memberikan sejumlah rekomendasi buku yang sesuai dengan kriteria pembaca atau buku yang serupa dengan menggunakan content-based filtering.
 - Memberikan sejumlah rekomendasi buku yang belum dibaca atau mungkin akan disukai oleh pembaca dengan menggunakan collaborative filtering.
+- Evaluasi terhadap model yang digunakan.
 
     ### Solution statements
     - Menerapkan content-based filtering dengan menggunakan tf-idf dan cosine similarity untuk mendapatkan top 5 dari kemiripan buku berdasarkan judul buku dan penulis buku.
     - Menerapkan collaborative filtering dengan menggunakan class RecommenderNet untuk mendapatkan rekomendasi top 10 buku dengan rating tinggi.
+    - Melakukan evaluasi model dengan menggunakan precision dan RMSE.
 
 ## Data Understanding
 Dataset yang digunakan diambil dari situs **Kaggle** yang berjudul [_"goodbooks-10k"_](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k?select=books.csv). Dataset ini berisi 5 file dengan ekstensi csv, yaitu:
@@ -111,7 +108,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 
    Kelebihan: baik dipakai ketika skala user besar, dapat menemukan ketertarikan spesifik dari seorang user dan dapat merekomendasikan item yang jarang disukai orang lain.
 
-   Kekurangan: karena meta feature yang digunakan kita yang menentukan sendiri, kualitas dari rekomendasi tergantung kualitas dari meta feature itu sendiri.
+   Kekurangan: karena meta feature yang digunakan ditentukan sendiri, kualitas dari rekomendasi tergantung kualitas dari meta feature itu sendiri.
 
    Modelling menggunakan content based filtering menghasilkan rekomendasi top 5 buku dari judul buku yang dimasukkan pada sistem.
 
@@ -131,7 +128,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
    | 3 | Mrs. Frisby and the Rats of NIMH (Rats of NMH ... |  Robert C. O'Brien |
    | 4 |                                    Shadow Drivers |      Robert Kurson |
 
-   Dari Tabel 1 dapat dilihat saat kita memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
+   Dari Tabel 1 dapat dilihat saat memasukkan judul buku `The Door Into Summer` muncul informasi buku tersebut dengan nama penulis `Robert A. Heinlein`. Kemudian setelah dilakukan pemanggilan fungsi `book_recommendation()` dengan judul tersebut muncul rekomendasi buku dengan penulis sama, karena sistem rekomendasi dibuat berdasarkan penulis seperti yang tertera pada Tabel 2.
 
 3. _**Collaborative Filtering**_. Collaborative filtering bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten. Model ini memprediksi kegunaan item berdasarkan penilaian pengguna sebelumnya, misalnya cara pemberian rating terhadap suatu item. Metode ini merekomendasikan item-item yang dipilih oleh pengguna lain dengan kemiripan model item dari pengguna saat ini.
 
@@ -139,7 +136,7 @@ Teknik yang digunakan untuk data preparation antara lain sebagai berikut:
 
    Kekurangan:
    - Cold-start problem (tidak dapat menghasilkan rekomendasi dikarenakan tidak adanya informasi preferensi) untuk pengguna baru dan item baru
-   - Sparse problem (matriks rating pengguna-item yang jarang/banyak yang kosong dapat mempengaruhi keakuratan algoritma)
+   - Sparse problem (matriks rating pengguna-item yang jarang/banyak yang kosong dapat mempengaruhi keakuratan algoritma)[4].
 
    Modelling menggunakan collaborative filtering menghasilkan rekomendasi top 10 buku dengan rating tinggi, dapat dilihat pada Gambar 2.
    ![image](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/0d96ff8a-dba7-42d5-ab15-2c8e2e7cabe3)
@@ -153,7 +150,7 @@ _**Precision**_
 
 Precision merupakan metrik untuk evaluasi model machine learning dimana metrik ini yang mengkuantifikasi jumlah prediksi positif yang benar yang dibuat. Berikut merupakan rumus dari metrik precision:
 
-Precision = # of recommendation that are relevant / # of item we recommended
+Precision = num of recommendation that are relevant / num of item we recommended
 
 Diketahui pada output rekomendasi content based filtering didapat rekomendasi buku berdasarkan penulisnya. Penulis yang dicari adalah "Robert A. Heinlein". Sistem memberikan 5 rekomendasi buku, dimana 3 dari 5 buku adalah buku dengan penulis yang sama atau data relevan. Maka precision dicari dengan membagikan hasil rekomendasi yang relevan dibagi jumlah yang direkomendasikan. Jadi precision = 3/5 = 0.6, sehingga persentase presisinya adalah 60%.
 
@@ -206,3 +203,12 @@ Visulaisasi evaluasi metrik menggunakan RMSE setelah pelatihan untuk model Colla
 
 ![rmse](https://github.com/arinditap/dicoding-MLT2-book-system-recomm/assets/48308725/dd8c29bd-b18f-4066-84a5-b7ce256cae4b)
 > Gambar 4. Visualisasi Hasil RMSE
+
+
+
+Referensi:
+1. Alkaff, M., Khatimi, H., & Eriadi, A. (2020). Sistem Rekomendasi Buku pada Perpustakaan Daerah Provinsi Kalimantan Selatan Menggunakan Metode Content-Based Filtering. MATRIK: Jurnal Manajemen, Teknik Informatika Dan Rekayasa Komputer, 20(1), 193-202.
+2. Irfan, M., & Cahyani, A. D. (2014). Sistem Rekomendasi: Buku Online Dengan Metode Collaborative Filtering. Jurnal Teknologi Technoscientia, 076-84.
+3. ZAYYAD, M. R. A. (2021). Sistem Rekomendasi Buku Menggunakan Metode Content Based Filtering.
+4. Arfisko, H. H., & Wibowo, A. T. (2022). Sistem Rekomendasi Film Menggunakan Metode Hybrid Collaborative Filtering Dan Content-Based Filtering. eProceedings of Engineering, 9(3).
+
